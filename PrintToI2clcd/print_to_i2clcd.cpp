@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <i2clcd.h>
+#include <i2c_lcd.h>
 
 
 int fd;  // seen by all subroutines
