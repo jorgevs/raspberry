@@ -1,5 +1,5 @@
 /*
- * gpio.c:
+ * Gpio.c:
  *	Swiss-Army-Knife, Set-UID command-line interface to the Raspberry
  *	Pi's GPIO.
  *	Copyright (c) 2012-2018 Gordon Henderson
@@ -62,30 +62,30 @@ extern void doQmode      (int argc, char *argv []) ;
 
 int wpMode ;
 
-char *usage = "Usage: gpio -v\n"
-              "       gpio -h\n"
-              "       gpio [-g|-1] ...\n"
-              "       gpio [-d] ...\n"
+char *usage = "Usage: Gpio -v\n"
+              "       Gpio -h\n"
+              "       Gpio [-g|-1] ...\n"
+              "       Gpio [-d] ...\n"
               "       [-x extension:params] [[ -x ...]] ...\n"
-              "       gpio [-p] <read/write/wb> ...\n"
-              "       gpio <mode/read/write/aread/awritewb/pwm/pwmTone/clock> ...\n"
-              "       gpio <toggle/blink> <pin>\n"
-	      "       gpio readall\n"
-	      "       gpio unexportall/exports\n"
-	      "       gpio export/edge/unexport ...\n"
-	      "       gpio wfi <pin> <mode>\n"
-	      "       gpio drive <group> <value>\n"
-	      "       gpio pwm-bal/pwm-ms \n"
-	      "       gpio pwmr <range> \n"
-	      "       gpio pwmc <divider> \n"
-	      "       gpio load spi/i2c\n"
-	      "       gpio unload spi/i2c\n"
-	      "       gpio i2cd/i2cdetect\n"
-	      "       gpio rbx/rbd\n"
-	      "       gpio wb <value>\n"
-	      "       gpio usbp high/low\n"
-	      "       gpio gbr <channel>\n"
-	      "       gpio gbw <channel> <value>" ;	// No trailing newline needed here.
+              "       Gpio [-p] <read/write/wb> ...\n"
+              "       Gpio <mode/read/write/aread/awritewb/pwm/pwmTone/clock> ...\n"
+              "       Gpio <toggle/blink> <pin>\n"
+	      "       Gpio readall\n"
+	      "       Gpio unexportall/exports\n"
+	      "       Gpio export/edge/unexport ...\n"
+	      "       Gpio wfi <pin> <mode>\n"
+	      "       Gpio drive <group> <value>\n"
+	      "       Gpio pwm-bal/pwm-ms \n"
+	      "       Gpio pwmr <range> \n"
+	      "       Gpio pwmc <divider> \n"
+	      "       Gpio load spi/i2c\n"
+	      "       Gpio unload spi/i2c\n"
+	      "       Gpio i2cd/i2cdetect\n"
+	      "       Gpio rbx/rbd\n"
+	      "       Gpio wb <value>\n"
+	      "       Gpio usbp high/low\n"
+	      "       Gpio gbr <channel>\n"
+	      "       Gpio gbw <channel> <value>" ;	// No trailing newline needed here.
 
 
 #ifdef	NOT_FOR_NOW
@@ -187,7 +187,7 @@ static int moduleLoaded (char *modName)
 
   if (fd == NULL)
   {
-    fprintf (stderr, "gpio: Unable to check /proc/modules: %s\n", strerror (errno)) ;
+    fprintf (stderr, "Gpio: Unable to check /proc/modules: %s\n", strerror (errno)) ;
     exit (1) ;
   }
 
@@ -400,7 +400,7 @@ static void doExports (UNU int argc, UNU char *argv [])
 
 // Try to read the direction
 
-    sprintf (fName, "/sys/class/gpio/gpio%d/direction", i) ;
+    sprintf (fName, "/sys/class/Gpio/Gpio%d/direction", i) ;
     if ((fd = open (fName, O_RDONLY)) == -1)
       continue ;
 
@@ -425,7 +425,7 @@ static void doExports (UNU int argc, UNU char *argv [])
 
 // Try to Read the value
 
-    sprintf (fName, "/sys/class/gpio/gpio%d/value", i) ;
+    sprintf (fName, "/sys/class/Gpio/Gpio%d/value", i) ;
     if ((fd = open (fName, O_RDONLY)) == -1)
     {
       printf ("No Value file (huh?)\n") ;
@@ -443,7 +443,7 @@ static void doExports (UNU int argc, UNU char *argv [])
 
 // Read any edge trigger file
 
-    sprintf (fName, "/sys/class/gpio/gpio%d/edge", i) ;
+    sprintf (fName, "/sys/class/Gpio/Gpio%d/edge", i) ;
     if ((fd = open (fName, O_RDONLY)) == -1)
     {
       printf ("\n") ;
@@ -466,8 +466,8 @@ static void doExports (UNU int argc, UNU char *argv [])
 
 /*
  * doExport:
- *	gpio export pin mode
- *	This uses the /sys/class/gpio device interface.
+ *	Gpio export pin mode
+ *	This uses the /sys/class/Gpio device interface.
  *********************************************************************************
  */
 
@@ -488,7 +488,7 @@ void doExport (int argc, char *argv [])
 
   mode = argv [3] ;
 
-  if ((fd = fopen ("/sys/class/gpio/export", "w")) == NULL)
+  if ((fd = fopen ("/sys/class/Gpio/export", "w")) == NULL)
   {
     fprintf (stderr, "%s: Unable to open GPIO export interface: %s\n", argv [0], strerror (errno)) ;
     exit (1) ;
@@ -497,7 +497,7 @@ void doExport (int argc, char *argv [])
   fprintf (fd, "%d\n", pin) ;
   fclose (fd) ;
 
-  sprintf (fName, "/sys/class/gpio/gpio%d/direction", pin) ;
+  sprintf (fName, "/sys/class/Gpio/Gpio%d/direction", pin) ;
   if ((fd = fopen (fName, "w")) == NULL)
   {
     fprintf (stderr, "%s: Unable to open GPIO direction interface for pin %d: %s\n", argv [0], pin, strerror (errno)) ;
@@ -522,10 +522,10 @@ void doExport (int argc, char *argv [])
 
 // Change ownership so the current user can actually use it
 
-  sprintf (fName, "/sys/class/gpio/gpio%d/value", pin) ;
+  sprintf (fName, "/sys/class/Gpio/Gpio%d/value", pin) ;
   changeOwner (argv [0], fName) ;
 
-  sprintf (fName, "/sys/class/gpio/gpio%d/edge", pin) ;
+  sprintf (fName, "/sys/class/Gpio/Gpio%d/edge", pin) ;
   changeOwner (argv [0], fName) ;
 
 }
@@ -533,10 +533,10 @@ void doExport (int argc, char *argv [])
 
 /*
  * doWfi:
- *	gpio wfi pin mode
+ *	Gpio wfi pin mode
  *	Wait for Interrupt on a given pin.
  *	Slight cheat here - it's easier to actually use ISR now (which calls
- *	gpio to set the pin modes!) then we simply sleep, and expect the thread
+ *	Gpio to set the pin modes!) then we simply sleep, and expect the thread
  *	to exit the program. Crude but effective.
  *********************************************************************************
  */
@@ -579,9 +579,9 @@ void doWfi (int argc, char *argv [])
 
 /*
  * doEdge:
- *	gpio edge pin mode
+ *	Gpio edge pin mode
  *	Easy access to changing the edge trigger on a GPIO pin
- *	This uses the /sys/class/gpio device interface.
+ *	This uses the /sys/class/Gpio device interface.
  *********************************************************************************
  */
 
@@ -603,7 +603,7 @@ void doEdge (int argc, char *argv [])
 
 // Export the pin and set direction to input
 
-  if ((fd = fopen ("/sys/class/gpio/export", "w")) == NULL)
+  if ((fd = fopen ("/sys/class/Gpio/export", "w")) == NULL)
   {
     fprintf (stderr, "%s: Unable to open GPIO export interface: %s\n", argv [0], strerror (errno)) ;
     exit (1) ;
@@ -612,7 +612,7 @@ void doEdge (int argc, char *argv [])
   fprintf (fd, "%d\n", pin) ;
   fclose (fd) ;
 
-  sprintf (fName, "/sys/class/gpio/gpio%d/direction", pin) ;
+  sprintf (fName, "/sys/class/Gpio/Gpio%d/direction", pin) ;
   if ((fd = fopen (fName, "w")) == NULL)
   {
     fprintf (stderr, "%s: Unable to open GPIO direction interface for pin %d: %s\n", argv [0], pin, strerror (errno)) ;
@@ -622,7 +622,7 @@ void doEdge (int argc, char *argv [])
   fprintf (fd, "in\n") ;
   fclose (fd) ;
 
-  sprintf (fName, "/sys/class/gpio/gpio%d/edge", pin) ;
+  sprintf (fName, "/sys/class/Gpio/Gpio%d/edge", pin) ;
   if ((fd = fopen (fName, "w")) == NULL)
   {
     fprintf (stderr, "%s: Unable to open GPIO edge interface for pin %d: %s\n", argv [0], pin, strerror (errno)) ;
@@ -641,10 +641,10 @@ void doEdge (int argc, char *argv [])
 
 // Change ownership of the value and edge files, so the current user can actually use it!
 
-  sprintf (fName, "/sys/class/gpio/gpio%d/value", pin) ;
+  sprintf (fName, "/sys/class/Gpio/Gpio%d/value", pin) ;
   changeOwner (argv [0], fName) ;
 
-  sprintf (fName, "/sys/class/gpio/gpio%d/edge", pin) ;
+  sprintf (fName, "/sys/class/Gpio/Gpio%d/edge", pin) ;
   changeOwner (argv [0], fName) ;
 
   fclose (fd) ;
@@ -653,8 +653,8 @@ void doEdge (int argc, char *argv [])
 
 /*
  * doUnexport:
- *	gpio unexport pin
- *	This uses the /sys/class/gpio device interface.
+ *	Gpio unexport pin
+ *	This uses the /sys/class/Gpio device interface.
  *********************************************************************************
  */
 
@@ -671,7 +671,7 @@ void doUnexport (int argc, char *argv [])
 
   pin = atoi (argv [2]) ;
 
-  if ((fd = fopen ("/sys/class/gpio/unexport", "w")) == NULL)
+  if ((fd = fopen ("/sys/class/Gpio/unexport", "w")) == NULL)
   {
     fprintf (stderr, "%s: Unable to open GPIO export interface\n", argv [0]) ;
     exit (1) ;
@@ -684,9 +684,9 @@ void doUnexport (int argc, char *argv [])
 
 /*
  * doUnexportAll:
- *	gpio unexportall
+ *	Gpio unexportall
  *	Un-Export all the GPIO pins.
- *	This uses the /sys/class/gpio device interface.
+ *	This uses the /sys/class/Gpio device interface.
  *********************************************************************************
  */
 
@@ -697,7 +697,7 @@ void doUnexportall (char *progName)
 
   for (pin = 0 ; pin < 63 ; ++pin)
   {
-    if ((fd = fopen ("/sys/class/gpio/unexport", "w")) == NULL)
+    if ((fd = fopen ("/sys/class/Gpio/unexport", "w")) == NULL)
     {
       fprintf (stderr, "%s: Unable to open GPIO export interface\n", progName) ;
       exit (1) ;
@@ -716,7 +716,7 @@ void doUnexportall (char *progName)
 
 static void doReset (UNU char *progName)
 {
-  printf ("GPIO Reset is dangerous and has been removed from the gpio command.\n") ;
+  printf ("GPIO Reset is dangerous and has been removed from the Gpio command.\n") ;
   printf (" - Please write a shell-script to reset the GPIO pins into the state\n") ;
   printf ("   that you need them in for your applications.\n") ;
 }
@@ -724,7 +724,7 @@ static void doReset (UNU char *progName)
 
 /*
  * doMode:
- *	gpio mode pin mode ...
+ *	Gpio mode pin mode ...
  *********************************************************************************
  */
 
@@ -770,7 +770,7 @@ void doMode (int argc, char *argv [])
 
 /*
  * doPadDrive:
- *	gpio drive group value
+ *	Gpio drive group value
  *********************************************************************************
  */
 
@@ -806,7 +806,7 @@ static void doPadDrive (int argc, char *argv [])
 /*
  * doUsbP:
  *	Control USB Power - High (1.2A) or Low (600mA)
- *	gpio usbp high/low
+ *	Gpio usbp high/low
  *********************************************************************************
  */
 
@@ -857,7 +857,7 @@ static void doUsbP (int argc, char *argv [])
 
 /*
  * doGbw:
- *	gpio gbw channel value
+ *	Gpio gbw channel value
  *	Gertboard Write - To the Analog output
  *********************************************************************************
  */
@@ -899,7 +899,7 @@ static void doGbw (int argc, char *argv [])
 
 /*
  * doGbr:
- *	gpio gbr channel
+ *	Gpio gbr channel
  *	From the analog input
  *********************************************************************************
  */
@@ -934,7 +934,7 @@ static void doGbr (int argc, char *argv [])
 
 /*
  * doWrite:
- *	gpio write pin value
+ *	Gpio write pin value
  *********************************************************************************
  */
 
@@ -966,7 +966,7 @@ static void doWrite (int argc, char *argv [])
 
 /*
  * doAwriterite:
- *	gpio awrite pin value
+ *	Gpio awrite pin value
  *********************************************************************************
  */
 
@@ -990,7 +990,7 @@ static void doAwrite (int argc, char *argv [])
 
 /*
  * doWriteByte:
- *	gpio wb value
+ *	Gpio wb value
  *********************************************************************************
  */
 
@@ -1012,7 +1012,7 @@ static void doWriteByte (int argc, char *argv [])
 
 /*
  * doReadByte:
- *	gpio rbx|rbd value
+ *	Gpio rbx|rbd value
  *********************************************************************************
  */
 
@@ -1267,7 +1267,7 @@ static void doVersion (char *argv [])
   int vMaj, vMin ;
 
   wiringPiVersion (&vMaj, &vMin) ;
-  printf ("gpio version: %d.%d\n", vMaj, vMin) ;
+  printf ("Gpio version: %d.%d\n", vMaj, vMin) ;
   printf ("Copyright (c) 2012-2018 Gordon Henderson\n") ;
   printf ("This is free software with ABSOLUTELY NO WARRANTY.\n") ;
   printf ("For details type: %s -warranty\n", argv [0]) ;
@@ -1312,7 +1312,7 @@ int main (int argc, char *argv [])
 
   if (getenv ("WIRINGPI_DEBUG") != NULL)
   {
-    printf ("gpio: wiringPi debug mode enabled\n") ;
+    printf ("Gpio: wiringPi debug mode enabled\n") ;
     wiringPiDebug = TRUE ;
   }
 
@@ -1320,8 +1320,8 @@ int main (int argc, char *argv [])
   {
     fprintf (stderr,
 "%s: At your service!\n"
-"  Type: gpio -h for full details and\n"
-"        gpio readall for a quick printout of your connector details\n", argv [0]) ;
+"  Type: Gpio -h for full details and\n"
+"        Gpio readall for a quick printout of your connector details\n", argv [0]) ;
     exit (EXIT_FAILURE) ;
   }
 
@@ -1352,7 +1352,7 @@ int main (int argc, char *argv [])
 
   if (strcasecmp (argv [1], "-warranty") == 0)
   {
-    printf ("gpio version: %s\n", VERSION) ;
+    printf ("Gpio version: %s\n", VERSION) ;
     printf ("Copyright (c) 2012-2018 Gordon Henderson\n") ;
     printf ("\n") ;
     printf ("    This program is free software; you can redistribute it and/or modify\n") ;
@@ -1377,7 +1377,7 @@ int main (int argc, char *argv [])
     exit (EXIT_FAILURE) ;
   }
 
-// Initial test for /sys/class/gpio operations:
+// Initial test for /sys/class/Gpio operations:
 
   /**/ if (strcasecmp (argv [1], "exports"    ) == 0)	{ doExports     (argc, argv) ;	return 0 ; }
   else if (strcasecmp (argv [1], "export"     ) == 0)	{ doExport      (argc, argv) ;	return 0 ; }

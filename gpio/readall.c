@@ -34,6 +34,7 @@
 #include <sys/stat.h>
 
 #include <wiringPi.h>
+#include "../wiringPi/wiringPi.h"
 
 extern int wpMode ;
 
@@ -70,7 +71,7 @@ static void doReadallExternal (void)
  *	Read all the GPIO pins
  *	We also want to use this to read the state of pins on an externally
  *	connected device, so we need to do some fiddling with the internal
- *	wiringPi node structures - since the gpio command can only use
+ *	wiringPi node structures - since the Gpio command can only use
  *	one external device at a time, we'll use that to our advantage...
  *********************************************************************************
  */
