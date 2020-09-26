@@ -17,15 +17,20 @@
 #define ENABLE  0b00000100 // Enable bit
 
 void lcd_init(int fd);
+
 void lcd_byte(int bits, int mode, int fd);
+
 void lcd_toggle_enable(int bits, int fd);
 
 // added by Lewis
 void typeInt(int i, int fd);
+
 void typeFloat(float myFloat, int fd);
+
 void lcdLoc(int line, int fd); //move cursor
 void ClrLcd(int fd); // clr LCD return home
 void typeln(const char *s, int fd);
+
 void typeChar(char val, int fd);
 
 #endif
