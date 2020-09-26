@@ -8,3 +8,4 @@ add_subdirectory(BlinkLed)
 add_subdirectory(PrintToI2clcd)
 
 add_executable(raspberry main.cpp)
+add_executable(main2 main2.cpp)
