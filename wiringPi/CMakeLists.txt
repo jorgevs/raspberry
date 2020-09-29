@@ -1,4 +1,5 @@
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lm -lpthread -lrt -lcrypt")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lm -lpthread -lrt -lcrypt")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lm -lpthread -lrt -lcrypt")
 
 set(WIRINGPI_SRC wiringPi.c
         wiringSerial.c wiringShift.c
@@ -18,3 +19,5 @@ set(WIRINGPI_SRC wiringPi.c
         wpiExtensions.c)
 
 add_library(wiringPi ${WIRINGPI_SRC})
+
+target_include_directories(wiringPi PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

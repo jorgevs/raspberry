@@ -69,7 +69,7 @@ static void logMsg (const char *message, ...)
 /*
  * sigHandler:
  * setupSigHandler:
- *      Somehing has happened that would normally terminate the program so try
+ *      Something has happened that would normally terminate the program so try
  *	to close down nicely.
  *********************************************************************************
  */
