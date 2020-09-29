@@ -10,4 +10,3 @@ set(WIRINGPIDEV_SRC ds1302.c maxdetect.c piNes.c
 add_library(wiringPiDev ${WIRINGPIDEV_SRC})
 
 target_include_directories(wiringPiDev PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-#target_include_directories(wiringPiDev PUBLIC ../wiringPi/)
