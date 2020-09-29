@@ -1,0 +1,16 @@
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lpthread -lm")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lpthread -lm")
+
+add_executable(blinkP blink.c)
+add_executable(buttons buttons.c)
+add_executable(reaction reaction.c)
+add_executable(ladder ladder.c)
+add_executable(metro metro.c)
+add_executable(motor motor.c)
+
+target_link_libraries(blinkP PUBLIC wiringPi wiringPiDev)
+target_link_libraries(buttons PUBLIC wiringPi wiringPiDev)
+target_link_libraries(reaction PUBLIC wiringPi wiringPiDev)
+target_link_libraries(ladder PUBLIC wiringPi wiringPiDev)
+target_link_libraries(metro PUBLIC wiringPi wiringPiDev)
+target_link_libraries(motor PUBLIC wiringPi wiringPiDev)
