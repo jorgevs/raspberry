@@ -27,35 +27,31 @@
 #include <wiringPi.h>
 #include <drcNet.h>
 
-int main (void)
-{
-  int i, led ;
+int main(void) {
+    int i, led;
 
-  printf ("Raspberry Pi - 8-LED Sequencer\n") ;
-  printf ("==============================\n") ;
-  printf ("\n") ;
-  printf ("Connect LEDs to the first 8 GPIO pins and watch ...\n") ;
+    printf("Raspberry Pi - 8-LED Sequencer\n");
+    printf("==============================\n");
+    printf("\n");
+    printf("Connect LEDs to the first 8 GPIO pins and watch ...\n");
 
-  int pinBase = 100 ;
+    int pinBase = 100;
 
 //  wiringPiSetup () ;
-  drcSetupNet (pinBase, 100, "192.168.254.21", "6124", "123456") ;
+    drcSetupNet(pinBase, 100, "192.168.254.21", "6124", "123456");
 
-  for (i = 0 ; i < 8 ; ++i)
-    pinMode (i + pinBase, OUTPUT) ;
+    for (i = 0; i < 8; ++i)
+        pinMode(i + pinBase, OUTPUT);
 
-  for (;;)
-  {
-    for (led = 0 ; led < 8 ; ++led)
-    {
-      digitalWrite (led + pinBase, 1) ;
-      delay (10) ;
+    for (;;) {
+        for (led = 0; led < 8; ++led) {
+            digitalWrite(led + pinBase, 1);
+            delay(10);
+        }
+
+        for (led = 0; led < 8; ++led) {
+            digitalWrite(led + pinBase, 0);
+            delay(10);
+        }
     }
-
-    for (led = 0 ; led < 8 ; ++led)
-    {
-      digitalWrite (led + pinBase, 0) ;
-      delay (10) ;
-    }
-  }
 }

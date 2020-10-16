@@ -2,7 +2,7 @@
  * blink12drcs.c:
  *	Simple sequence over the first 12 GPIO pins - LEDs
  *	Aimed at the Gertboard, but it's fairly generic.
- *	This version uses DRC totalk to the ATmega on the Gertboard
+ *	This version uses DRC to talk to the ATmega on the Gertboard
  *
  * Copyright (c) 2012-2013 Gordon Henderson. <projects@drogon.net>
  ***********************************************************************

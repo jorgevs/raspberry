@@ -31,7 +31,7 @@
 #include <wiringPi.h>
 
 
-#define	LOW_POWER	35
+#define    LOW_POWER    35
 
 /*
  * lowPower:
@@ -40,12 +40,11 @@
  *********************************************************************************
  */
 
-void lowPower (void)
-{
-  time_t t ;
+void lowPower(void) {
+    time_t t;
 
-  time (&t) ;
-  printf ("%s: LOW POWER DETECTED\n", ctime (&t)) ;
+    time(&t);
+    printf("%s: LOW POWER DETECTED\n", ctime(&t));
 }
 
 
@@ -55,14 +54,13 @@ void lowPower (void)
  *********************************************************************************
  */
 
-int main (void)
-{
-  wiringPiSetupGpio () ;	// GPIO mode as it's an internal pin
+int main(void) {
+    wiringPiSetupGpio();    // GPIO mode as it's an internal pin
 
-  wiringPiISR (LOW_POWER, INT_EDGE_FALLING, &lowPower) ;
+    wiringPiISR(LOW_POWER, INT_EDGE_FALLING, &lowPower);
 
-  for (;;)
-    delay (1000) ;
+    for (;;)
+        delay(1000);
 
-  return 0 ;
+    return 0;
 }

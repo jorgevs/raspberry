@@ -59,7 +59,7 @@ int main()
     for (x = 0 ; x < CYCLES ; ++x)
     {
       for (;;)				// Repeat this if we get a delay over 999uS
-      {					// -> High probability Linux has deschedulled us
+      {					// -> High probability Linux has de-scheduled us
 	gettimeofday (&t1, NULL) ;
 	  usleep (del) ;
 //          delayMicroseconds (del) ;

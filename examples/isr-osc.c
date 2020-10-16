@@ -46,32 +46,30 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
-#include <stdlib.h>
 #include <wiringPi.h>
 
 
 // What GPIO input are we using?
 //	This is a wiringPi pin number
 
-#define	OUT_PIN		0
-#define	IN_PIN		1
+#define    OUT_PIN        0
+#define    IN_PIN         1
 
 // globalCounter:
 //	Global variable to count interrupts
 //	Should be declared volatile to make sure the compiler doesn't cache it.
 
-static volatile int globalCounter = 0 ;
+static volatile int globalCounter = 0;
 
 /*
  * myInterrupt:
  *********************************************************************************
  */
 
-void myInterrupt (void)
-{
-  digitalWrite (OUT_PIN, 1) ;
-  ++globalCounter ;
-  digitalWrite (OUT_PIN, 0) ;
+void myInterrupt(void) {
+    digitalWrite(OUT_PIN, 1);
+    ++globalCounter;
+    digitalWrite(OUT_PIN, 0);
 }
 
 
@@ -81,38 +79,35 @@ void myInterrupt (void)
  *********************************************************************************
  */
 
-int main (void)
-{
-  int myCounter   = 0 ;
-  int lastCounter = 0 ;
+int main(void) {
+    int myCounter = 0;
+    int lastCounter = 0;
 
-  if (wiringPiSetup () < 0)
-  {
-    fprintf (stderr, "Unable to setup wiringPi: %s\n", strerror (errno)) ;
-    return 1 ;
-  }
+    if (wiringPiSetup() < 0) {
+        fprintf(stderr, "Unable to setup wiringPi: %s\n", strerror(errno));
+        return 1;
+    }
 
-  pinMode (OUT_PIN, OUTPUT) ;
-  pinMode (IN_PIN,  INPUT) ;
+    pinMode(OUT_PIN, OUTPUT);
+    pinMode(IN_PIN, INPUT);
 
-  if (wiringPiISR (IN_PIN, INT_EDGE_FALLING, &myInterrupt) < 0)
-  {
-    fprintf (stderr, "Unable to setup ISR: %s\n", strerror (errno)) ;
-    return 1 ;
-  }
+    if (wiringPiISR(IN_PIN, INT_EDGE_FALLING, &myInterrupt) < 0) {
+        fprintf(stderr, "Unable to setup ISR: %s\n", strerror(errno));
+        return 1;
+    }
 
-  for (;;)
-  {
-    printf ("Waiting ... ") ; fflush (stdout) ;
+    for (;;) {
+        printf("Waiting ... ");
+        fflush(stdout);
 
-    while (myCounter == globalCounter)
-      delay (1000) ;
+        while (myCounter == globalCounter)
+            delay(1000);
 
-    printf (" Done. counter: %6d: %6d\n",
-		globalCounter, myCounter - lastCounter) ;
-    lastCounter = myCounter ;
-    myCounter   = globalCounter ;
-  }
+        printf(" Done. counter: %6d: %6d\n",
+               globalCounter, myCounter - lastCounter);
+        lastCounter = myCounter;
+        myCounter = globalCounter;
+    }
 
-  return 0 ;
+    return 0;
 }

@@ -30,17 +30,15 @@
 #include <wiringPi.h>
 #include <softServo.h>
 
-int main ()
-{
-  if (wiringPiSetup () == -1)
-  {
-    fprintf (stdout, "oops: %s\n", strerror (errno)) ;
-    return 1 ;
-  }
+int main() {
+    if (wiringPiSetup() == -1) {
+        fprintf(stdout, "oops: %s\n", strerror(errno));
+        return 1;
+    }
 
-  softServoSetup (0, 1, 2, 3, 4, 5, 6, 7) ;
+    softServoSetup(0, 1, 2, 3, 4, 5, 6, 7);
 
-  softServoWrite (0,  0) ;
+    softServoWrite(0, 0);
 /*
   softServoWrite (1, 1000) ;
   softServoWrite (2, 1100) ;
@@ -51,7 +49,7 @@ int main ()
   softServoWrite (7, 2200) ;
 */
 
-  for (;;)
-    delay (10) ;
+    for (;;)
+        delay(10);
 
 }

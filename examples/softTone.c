@@ -1,7 +1,7 @@
 /*
  * softTone.c:
  *	Test of the softTone module in wiringPi
- *	Plays a scale out on pin 3 - connect pizeo disc to pin 3 & 0v
+ *	Plays a scale out on pin 3 - connect a passive buzzer to pin 3 & 0v
  *
  * Copyright (c) 2012-2013 Gordon Henderson. <projects@drogon.net>
  ***********************************************************************
@@ -24,31 +24,26 @@
  */
 
 #include <stdio.h>
-#include <errno.h>
-#include <string.h>
 
 #include <wiringPi.h>
 #include <softTone.h>
 
-#define	PIN	3
+#define    PIN    3
 
-int scale [8] = { 262, 294, 330, 349, 392, 440, 494, 525 } ;
+int scale[8] = {262, 294, 330, 349, 392, 440, 494, 525};
 
-int main ()
-{
-  int i ;
+int main() {
+    int i;
 
-  wiringPiSetup () ;
+    wiringPiSetup();
 
-  softToneCreate (PIN) ;
+    softToneCreate(PIN);
 
-  for (;;)
-  {
-    for (i = 0 ; i < 8 ; ++i)
-    {
-      printf ("%3d\n", i) ;
-      softToneWrite (PIN, scale [i]) ;
-      delay (500) ;
+    for (;;) {
+        for (i = 0; i < 8; ++i) {
+            printf("%3d\n", i);
+            softToneWrite(PIN, scale[i]);
+            delay(500);
+        }
     }
-  }
 }

@@ -27,69 +27,65 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
 
-#define	FAST_COUNT	10000000
-#define	SLOW_COUNT	 1000000
-#define	PASSES		       5
+#define    FAST_COUNT    10000000
+#define    SLOW_COUNT     1000000
+#define    PASSES               5
 
-void speedTest (int pin, int maxCount)
-{
-  int count, sum, perSec, i ;
-  unsigned int start, end ;
+void speedTest(int pin, int maxCount) {
+    int count, sum, perSec, i;
+    unsigned int start, end;
 
-  sum = 0 ;
+    sum = 0;
 
-  for (i = 0 ; i < PASSES ; ++i)
-  {
-    start = millis () ;
-    for (count = 0 ; count < maxCount ; ++count)
-      digitalWrite (pin, 1) ;
-    end = millis () ;
-    printf (" %6d", end - start) ;
-    fflush (stdout) ;
-    sum += (end - start) ;
-  }
+    for (i = 0; i < PASSES; ++i) {
+        start = millis();
+        for (count = 0; count < maxCount; ++count)
+            digitalWrite(pin, 1);
+        end = millis();
+        printf(" %6d", end - start);
+        fflush(stdout);
+        sum += (end - start);
+    }
 
-  digitalWrite (pin, 0) ;
-  printf (". Av: %6dmS", sum / PASSES) ;
-  perSec = (int)(double)maxCount / (double)((double)sum / (double)PASSES) * 1000.0 ;
-  printf (": %7d/sec\n", perSec) ;
+    digitalWrite(pin, 0);
+    printf(". Av: %6dmS", sum / PASSES);
+    perSec = (int) (double) maxCount / (double) ((double) sum / (double) PASSES) * 1000.0;
+    printf(": %7d/sec\n", perSec);
 }
 
 
-int main (void)
-{
-  printf ("Raspberry Pi wiringPi GPIO speed test program\n") ;
-  printf ("=============================================\n") ;
+int main(void) {
+    printf("Raspberry Pi wiringPi GPIO speed test program\n");
+    printf("=============================================\n");
 
 // Start the standard way
 
-  printf ("\nNative wiringPi method: (%8d iterations)\n", FAST_COUNT) ;
-  wiringPiSetup () ;
-  pinMode (0, OUTPUT) ;
-  speedTest (0, FAST_COUNT) ;
+    printf("\nNative wiringPi method: (%8d iterations)\n", FAST_COUNT);
+    wiringPiSetup();
+    pinMode(0, OUTPUT);
+    speedTest(0, FAST_COUNT);
 
 // GPIO
 
-  printf ("\nNative GPIO method: (%8d iterations)\n", FAST_COUNT) ;
-  wiringPiSetupGpio () ;
-  pinMode (17, OUTPUT) ;
-  speedTest (17, FAST_COUNT) ;
+    printf("\nNative GPIO method: (%8d iterations)\n", FAST_COUNT);
+    wiringPiSetupGpio();
+    pinMode(17, OUTPUT);
+    speedTest(17, FAST_COUNT);
 
 // Phys
 
-  printf ("\nPhysical pin GPIO method: (%8d iterations)\n", FAST_COUNT) ;
-  wiringPiSetupPhys () ;
-  pinMode (11, OUTPUT) ;
-  speedTest (11, FAST_COUNT) ;
+    printf("\nPhysical pin GPIO method: (%8d iterations)\n", FAST_COUNT);
+    wiringPiSetupPhys();
+    pinMode(11, OUTPUT);
+    speedTest(11, FAST_COUNT);
 
 // Switch to SYS mode:
 
-  system ("/usr/local/bin/gpio export 17 out") ;
-  printf ("\n/sys/class/gpio method: (%8d iterations)\n", SLOW_COUNT) ;
-  wiringPiSetupSys () ;
-  speedTest (17, SLOW_COUNT) ;
+    system("/usr/local/bin/gpio export 17 out");
+    printf("\n/sys/class/gpio method: (%8d iterations)\n", SLOW_COUNT);
+    wiringPiSetupSys();
+    speedTest(17, SLOW_COUNT);
 
-  return 0 ;
+    return 0;
 }

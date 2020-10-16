@@ -31,7 +31,7 @@
 //	19 Jul 2012:
 //		Moved to the LGPL
 //		Added an abstraction layer to the main routines to save a tiny
-//		bit of run-time and make the clode a little cleaner (if a little
+//		bit of run-time and make the code a little cleaner (if a little
 //		larger)
 //		Added waitForInterrupt code
 //		Added piHiPri code
@@ -677,7 +677,7 @@ int wiringPiFailure (int fatal, const char *message, ...)
 /*
  * setupCheck
  *	Another sanity check because some users forget to call the setup
- *	function. Mosty because they need feeding C drip by drip )-:
+ *	function. Mostly because they need feeding C drip by drip )-:
  *********************************************************************************
  */
 
@@ -791,7 +791,7 @@ int piGpioLayout (void)
   }
 #endif
 
-// Actually... That has caused me more than 10,000 emails so-far. Mosty by
+// Actually... That has caused me more than 10,000 emails so-far. Mostly by
 //	people who think they know better by creating a statically linked
 //	version that will not run with a new 4.9 kernel. I utterly hate and
 //	despise those people.
@@ -930,7 +930,7 @@ int piBoardRev (void)
  *		0018 - Model A+  Rev 1.1, 256MB, Sony
  *		001b - Model A+  Rev 1.1, 256MB, Egoman
  *
- *	A small thorn is the olde style overvolting - that will add in
+ *	A small thorn is the old style overvolting - that will add in
  *		1000000
  *
  *	The Pi compute module has an revision of 0011 or 0014 - since we only
@@ -1052,7 +1052,7 @@ void piBoardId (int *model, int *rev, int *mem, int *maker, int *warranty)
 
     c = c + strlen (c) - 4 ;
 
-// Fill out the replys as appropriate
+// Fill out the replays as appropriate
 
     /**/ if (strcmp (c, "0002") == 0) { *model = PI_MODEL_B  ; *rev = PI_VERSION_1   ; *mem = 0 ; *maker = PI_MAKER_EGOMAN  ; }
     else if (strcmp (c, "0003") == 0) { *model = PI_MODEL_B  ; *rev = PI_VERSION_1_1 ; *mem = 0 ; *maker = PI_MAKER_EGOMAN  ; }
@@ -2124,7 +2124,7 @@ void delay (unsigned int howLong)
 
 /*
  * delayMicroseconds:
- *	This is somewhat intersting. It seems that on the Pi, a single call
+ *	This is somewhat interesting. It seems that on the Pi, a single call
  *	to nanosleep takes some 80 to 130 microseconds anyway, so while
  *	obeying the standards (may take longer), it's not always what we
  *	want!
@@ -2133,7 +2133,7 @@ void delay (unsigned int howLong)
  *	in a hard loop, watching a built-in counter on the ARM chip. This is
  *	somewhat sub-optimal in that it uses 100% CPU, something not an issue
  *	in a microcontroller, but under a multi-tasking, multi-user OS, it's
- *	wastefull, however we've no real choice )-:
+ *	wasteful, however we've no real choice )-:
  *
  *      Plan B: It seems all might not be well with that plan, so changing it
  *      to use gettimeofday () and poll on that instead...

@@ -3,7 +3,7 @@
  *	Wait for Interrupt test program - ISR method
  *
  *	How to test:
- *	  Use the SoC's pull-up and pull down resistors that are avalable
+ *	  Use the SoC's pull-up and pull down resistors that are available
  *	on input pins. So compile & run this program (via sudo), then
  *	in another terminal:
  *		gpio mode 0 up

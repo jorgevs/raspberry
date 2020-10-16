@@ -2,7 +2,7 @@
  * lcd.c:
  *	Text-based LCD driver.
  *	This is designed to drive the parallel interface LCD drivers
- *	based in the Hitachi HD44780U controller and compatables.
+ *	based in the Hitachi HD44780U controller and compatibles.
  *
  *	This test program assumes the following:
  *
