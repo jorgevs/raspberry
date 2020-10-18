@@ -11,6 +11,7 @@ add_subdirectory(MyDevLibs)
 add_subdirectory(PrintToI2clcd)
 add_subdirectory(examples)
 add_subdirectory(myExamples)
+add_subdirectory(starterKit)
 
 #add_subdirectory(examples/PiFace)
 #add_subdirectory(examples/Gertboard)
